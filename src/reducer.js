@@ -1,3 +1,4 @@
+import { act } from 'react-dom/test-utils'
 import {
   SET_LOADING,
   SET_STORIES,
@@ -28,10 +29,28 @@ const reducer = (state, action) => {
       page: 0,
       searchTerm: action.payload
     }
-    case HANDLE_PAGE: return {
-      ...state,
-      page: state.page += 1,
-    }
+    case HANDLE_PAGE:
+      if (action.payload === 'prev') {
+        let prevPage = state.page - 1
+        if (prevPage < 0) {
+          prevPage = state.totalPages - 1
+        }
+        return {
+          ...state,
+          page: prevPage
+        }
+      }
+
+      if (action.payload === 'next') {
+        let nextPage = state.page + 1
+        if (nextPage > state.totalPages - 1) {
+          nextPage = 0
+        }
+        return {
+          ...state,
+          page: nextPage
+        }
+      }
 
     default: throw new Error(`No Matching "${action.type}" action type`)
   }
