@@ -66,7 +66,7 @@ const AppProvider = ({ children }) => {
   // Using useEffect to Fetch Data
   useEffect(() => {
     fetchStories(`${mainUrl}query=${state.searchTerm}&page=${state.page}`)
-  }, [])
+  }, [state.searchTerm])
 
 
   return <AppContext.Provider value={{ ...state, removeItem, formInputHandler }}>
