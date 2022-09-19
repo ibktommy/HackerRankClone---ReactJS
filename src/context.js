@@ -54,6 +54,9 @@ const AppProvider = ({ children }) => {
     })
   }
 
+  // Function to Handle SearchTerm
+
+
   // Using useEffect to Fetch Data
   useEffect(() => {
     fetchStories(`${mainUrl}query=${state.searchTerm}&page=${state.page}`)
