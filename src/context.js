@@ -13,6 +13,10 @@ const mainUrl = 'https://hn.algolia.com/api/v1/search?'
 // Setting up Reducer
 const initialState = {
   isLoading: true,
+  results: [],
+  searchTerm: 'react',
+  page: 0,
+  totalPages: 0,
 }
 
 // Implementing Context for the APP
@@ -23,11 +27,19 @@ const AppProvider = ({ children }) => {
 
   const fetchStories = async (mainUrl) => {
     dispatch({ type: SET_LOADING })
+
+    try {
+      const response = await fetch(mainUrl)
+      const data = await response.json()
+      console.log(data)
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   // Using useEffect to Fetch Data
   useEffect(() => {
-    fetchStories()
+    fetchStories(`${mainUrl}query=${state.searchTerm}&page=${state.page}`)
   }, [])
 
 
