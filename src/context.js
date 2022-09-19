@@ -46,13 +46,18 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  // Function to Delete a Selected Item from the Data-Array-Fetched
+  const removeItem = (id) => {
+    console.log(id)
+  }
+
   // Using useEffect to Fetch Data
   useEffect(() => {
     fetchStories(`${mainUrl}query=${state.searchTerm}&page=${state.page}`)
   }, [])
 
 
-  return <AppContext.Provider value={{ ...state }}>
+  return <AppContext.Provider value={{ ...state, removeItem }}>
     {children}
   </AppContext.Provider>
 }
