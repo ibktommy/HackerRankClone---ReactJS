@@ -9,9 +9,20 @@ import {
 const reducer = (state, action) => {
 
   switch (action.type) {
-    case SET_LOADING: return { ...state, isLoading: true }
-    case SET_STORIES: return { ...state, isLoading: false, responseData: action.payload.responseData, totalPages: action.payload.totalPages }
-
+    case SET_LOADING: return {
+      ...state,
+      isLoading: true
+    }
+    case SET_STORIES: return {
+      ...state,
+      isLoading: false,
+      responseData: action.payload.responseData,
+      totalPages: action.payload.totalPages,
+    }
+    case REMOVE_STORY: return {
+      ...state,
+      responseData: state.responseData.filter((item) => item.objectID !== action.payload)
+    }
 
     default: throw new Error(`No Matching "${action.type}" action type`)
   }

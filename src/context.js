@@ -48,7 +48,10 @@ const AppProvider = ({ children }) => {
 
   // Function to Delete a Selected Item from the Data-Array-Fetched
   const removeItem = (id) => {
-    console.log(id)
+    dispatch({
+      type: REMOVE_STORY,
+      payload: id,
+    })
   }
 
   // Using useEffect to Fetch Data
