@@ -7,7 +7,7 @@ import {
 } from './actions'
 
 const reducer = (state, action) => {
-  
+
   switch (action.type) {
     case SET_LOADING: return {
       ...state,
@@ -22,6 +22,11 @@ const reducer = (state, action) => {
     case REMOVE_STORY: return {
       ...state,
       responseData: state.responseData.filter((item) => item.objectID !== action.payload)
+    }
+    case HANDLE_SEARCH: return {
+      ...state,
+      page: 0,
+      searchTerm: action.payload
     }
 
     default: throw new Error(`No Matching "${action.type}" action type`)
