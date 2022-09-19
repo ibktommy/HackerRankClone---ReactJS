@@ -55,6 +55,12 @@ const AppProvider = ({ children }) => {
   }
 
   // Function to Handle SearchTerm
+  const formInputHandler = (searchTerm) => {
+    dispatch({
+      type: HANDLE_SEARCH,
+      payload: searchTerm,
+    })
+  }
 
 
   // Using useEffect to Fetch Data
@@ -63,7 +69,7 @@ const AppProvider = ({ children }) => {
   }, [])
 
 
-  return <AppContext.Provider value={{ ...state, removeItem }}>
+  return <AppContext.Provider value={{ ...state, removeItem, formInputHandler }}>
     {children}
   </AppContext.Provider>
 }
