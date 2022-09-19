@@ -2,15 +2,26 @@ import React from 'react'
 import { useGlobalContext } from '../context'
 
 const Stories = () => {
-  const { isLoading } = useGlobalContext()
-  console.log(isLoading)
+  const { isLoading, responseData } = useGlobalContext()
+  console.log(isLoading, responseData)
 
   if (isLoading) {
     return <div className='loading'></div>
   }
 
   return (
-    <h1>Stories</h1>
+    <div className="stories">
+      {
+        responseData.map((item, index) => {
+          console.log(item)
+          return (
+            <article key={index} className='story'>
+              Single STory
+            </article>
+          )
+        })
+      }
+    </div>
   )
 }
 

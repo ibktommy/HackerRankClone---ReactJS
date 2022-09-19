@@ -13,7 +13,7 @@ const mainUrl = 'https://hn.algolia.com/api/v1/search?'
 // Setting up Reducer
 const initialState = {
   isLoading: true,
-  results: [],
+  responseData: [],
   searchTerm: 'react',
   page: 0,
   totalPages: 0,
@@ -36,7 +36,7 @@ const AppProvider = ({ children }) => {
 
       dispatch({
         type: SET_STORIES, payload: {
-          results: data.hits,
+          responseData: data.hits,
           totalPages: data.nbPages,
         }
       })
