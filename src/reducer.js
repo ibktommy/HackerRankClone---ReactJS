@@ -10,7 +10,7 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case 'SET_LOADING': return { ...state, isLoading: true }
-    default: throw new Error(`No Matching Type`)
+    default: throw new Error(`No Matching Type "${action.type}" action type`)
   }
 }
 export default reducer
