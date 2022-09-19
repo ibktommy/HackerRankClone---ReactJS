@@ -73,7 +73,7 @@ const AppProvider = ({ children }) => {
   // Using useEffect to Fetch Data
   useEffect(() => {
     fetchStories(`${mainUrl}query=${state.searchTerm}&page=${state.page}`)
-  }, [state.searchTerm])
+  }, [state.searchTerm, state.page])
 
 
   return <AppContext.Provider value={
