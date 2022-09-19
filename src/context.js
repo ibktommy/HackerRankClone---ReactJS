@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 import {
   SET_LOADING,
   SET_STORIES,
@@ -11,7 +11,9 @@ import reducer from './reducer'
 const mainUrl = 'https://hn.algolia.com/api/v1/search?'
 
 // Setting up Reducer
-const initialState = {}
+const initialState = {
+  isLoading: true,
+}
 
 // Implementing Context for the APP
 const AppContext = React.createContext()
@@ -19,8 +21,17 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  const fetchStories = async (mainUrl) => {
+    dispatch({ type: 'SET_LOADING' })
+  }
 
-  return <AppContext.Provider value={'HEllo'}>
+  // Using useEffect to Fetch Data
+  useEffect(() => {
+    fetchStories()
+  }, [])
+
+
+  return <AppContext.Provider value={{...state}}>
     {children}
   </AppContext.Provider>
 }
