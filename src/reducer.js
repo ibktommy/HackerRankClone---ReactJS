@@ -28,6 +28,10 @@ const reducer = (state, action) => {
       page: 0,
       searchTerm: action.payload
     }
+    case HANDLE_PAGE: return {
+      ...state,
+      page: state.page += 1,
+    }
 
     default: throw new Error(`No Matching "${action.type}" action type`)
   }

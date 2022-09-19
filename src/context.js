@@ -62,6 +62,13 @@ const AppProvider = ({ children }) => {
     })
   }
 
+  // Function To Increase Page-state-value
+  const handlePage = (value) => {
+    dispatch({
+      type: HANDLE_PAGE,
+      payload: value
+    })
+  }
 
   // Using useEffect to Fetch Data
   useEffect(() => {
@@ -69,7 +76,10 @@ const AppProvider = ({ children }) => {
   }, [state.searchTerm])
 
 
-  return <AppContext.Provider value={{ ...state, removeItem, formInputHandler }}>
+  return <AppContext.Provider value={
+    {
+      ...state, removeItem, formInputHandler, handlePage 
+  }}>
     {children}
   </AppContext.Provider>
 }
