@@ -25,6 +25,7 @@ const AppContext = React.createContext()
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  // Function that is called to fetch data from the external API
   const fetchStories = async (mainUrl) => {
     dispatch({ type: SET_LOADING })
 
@@ -32,6 +33,14 @@ const AppProvider = ({ children }) => {
       const response = await fetch(mainUrl)
       const data = await response.json()
       console.log(data)
+
+      dispatch({
+        type: SET_STORIES, payload: {
+          results: data.hits,
+          totalPages: data.nbPages,
+        }
+      })
+
     } catch (error) {
       console.log(error.message)
     }
@@ -43,7 +52,7 @@ const AppProvider = ({ children }) => {
   }, [])
 
 
-  return <AppContext.Provider value={{...state}}>
+  return <AppContext.Provider value={{ ...state }}>
     {children}
   </AppContext.Provider>
 }
